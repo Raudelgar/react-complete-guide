@@ -51,19 +51,11 @@ class App extends Component {
       cursor: "pointer"
     };
 
-    return (
-      //jsx syntax
-      <div className="App">
-        <h1>Hi, I am a React App</h1>
-        <p>This is working!!</p>
-        <button
-        style={designBtn} 
-        onClick={this.togglePeronsHandler}>
-        Show Person
-        </button>
-        { 
-          this.state.showPerson ?
-            <div>
+    let persons = null;
+
+    if(this.state.showPerson) {
+      persons = (
+          <div>
               <Person
                 name={this.state.person[0].name} 
                 gender={this.state.person[0].gender} 
@@ -76,8 +68,21 @@ class App extends Component {
                 change={this.changeNameHandler}>
                 My hobbies: Teaching
               </Person>
-            </div> : null
-        }
+            </div>
+      );
+    }
+
+    return (
+      //jsx syntax
+      <div className="App">
+        <h1>Hi, I am a React App</h1>
+        <p>This is working!!</p>
+        <button
+        style={designBtn} 
+        onClick={this.togglePeronsHandler}>
+        Show Person
+        </button>
+        {persons}
       </div>
     );
 
