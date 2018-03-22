@@ -14,16 +14,16 @@ class App extends Component {
   }
 
   //Method
-  switchNameHandler = (newName) => {
-    // console.log("Was cliked!!");
-    this.setState({
-      person: [
-        {name: newName, gender: "he", age: 32},
-        {name: "Marjorie", gender: "she",age: 31}
-      ]
-    } 
-    );
-  }
+  // switchNameHandler = (newName) => {
+  //   // console.log("Was cliked!!");
+  //   this.setState({
+  //     person: [
+  //       {name: newName, gender: "he", age: 32},
+  //       {name: "Marjorie", gender: "she",age: 31}
+  //     ]
+  //   } 
+  //   );
+  // }
 
   //Method
   changeNameHandler = (event) =>{
@@ -38,6 +38,13 @@ class App extends Component {
   togglePeronsHandler = () => {
     const doesShow = this.state.showPerson;
     this.setState({showPerson : !doesShow});
+  }
+
+  //delete a person method
+  deletePersonHandler = (indexPerson) => {
+    const personDel = this.state.person;
+    personDel.splice(indexPerson, 1);
+    this.setState({personDel : personDel})
   }
 
   //React execution method
@@ -56,19 +63,14 @@ class App extends Component {
     if(this.state.showPerson) {
       persons = (
           <div>
-              <Person
-                name={this.state.person[0].name} 
-                gender={this.state.person[0].gender} 
-                age={this.state.person[0].age}/>
-              <Person
-                click={this.switchNameHandler.bind(this, "Rau!!")}  
-                name={this.state.person[1].name} 
-                gender={this.state.person[1].gender} 
-                age={this.state.person[1].age}
-                change={this.changeNameHandler}>
-                My hobbies: Teaching
-              </Person>
-            </div>
+            {this.state.person.map((person, index) => {
+              return <Person 
+                click={this.deletePersonHandler.bind(this,index)}
+                name={person.name}
+                gender={person.gender}
+                age={person.age}/>
+            })}
+          </div>
       );
     }
 
