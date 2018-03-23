@@ -59,11 +59,9 @@ class App extends Component {
     //One way to do it is using slice()
     // const personDel = this.state.person.slice();
     //Other way is implementing ES6 syntax
-    // const personDel = [...this.state.person];
-    //For some reason the above syntax are not working :(
-    const personDel = this.state.person;
+    const personDel = [...this.state.person];
     personDel.splice(indexPerson, 1);
-    this.setState({personDel : personDel});
+    this.setState({person : personDel});
   }
 
   //React execution method
