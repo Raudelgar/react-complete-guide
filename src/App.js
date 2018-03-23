@@ -7,8 +7,8 @@ class App extends Component {
   //Initializing variables
   state = {
     person: [
-      {name: "Raudel", gender: "he", age: 31},
-      {name: "Marjorie", gender: "she",age: 30}
+      {id: 1, name: "Raudel", gender: "he", age: 31},
+      {id: 2, name: "Marjorie", gender: "she",age: 30}
     ],
     showPerson : false
   }
@@ -26,13 +26,25 @@ class App extends Component {
   // }
 
   //Method
-  changeNameHandler = (event) =>{
-    this.setState({
-      person: [
-        {name: "Raudel", gender: "he", age: 31},
-        {name: event.target.value, gender: "she",age: 30}
-      ]
+  changeNameHandler = (event, id) =>{
+    const personIndex = this.state.person.findIndex((p) => {
+      return p.id === id;
     });
+
+    //Using ES5 syntax
+    //const person = Object.assign({}, this.state.person[personIndex]);
+
+    //Using ES6 syntax
+    const person = {
+      ...this.state.person[personIndex]
+    };
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.person];
+    persons[personIndex] = person;
+
+    this.setState({person: persons});
   }
 
   togglePeronsHandler = () => {
@@ -42,9 +54,16 @@ class App extends Component {
 
   //delete a person method
   deletePersonHandler = (indexPerson) => {
+    //since array are objects in JS, you need to make 
+    //a copy of its reference in order to manipulated
+    //One way to do it is using slice()
+    // const personDel = this.state.person.slice();
+    //Other way is implementing ES6 syntax
+    // const personDel = [...this.state.person];
+    //For some reason the above syntax are not working :(
     const personDel = this.state.person;
     personDel.splice(indexPerson, 1);
-    this.setState({personDel : personDel})
+    this.setState({personDel : personDel});
   }
 
   //React execution method
@@ -66,9 +85,12 @@ class App extends Component {
             {this.state.person.map((person, index) => {
               return <Person 
                 click={this.deletePersonHandler.bind(this,index)}
+                // click={() => this.deletePersonHandler(index)}
                 name={person.name}
                 gender={person.gender}
-                age={person.age}/>
+                age={person.age}
+                key={person.id}
+                change={(event) => this.changeNameHandler(event, person.id)}/>
             })}
           </div>
       );
