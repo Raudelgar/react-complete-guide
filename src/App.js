@@ -68,7 +68,8 @@ class App extends Component {
   render() {
     //inline style
     const designBtn = {
-      backgroundColor: "white",
+      backgroundColor: "green",
+      color: "white",
       font: "inherit",
       border: "1px solid blue",
       padding: "8px",
@@ -92,6 +93,7 @@ class App extends Component {
             })}
           </div>
       );
+      designBtn.backgroundColor = "red";
     }
 
     return (
