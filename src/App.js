@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 
 class App extends Component {
 
@@ -66,34 +67,26 @@ class App extends Component {
 
   //React execution method
   render() {
-    //inline style
-    const designBtn = {
-      backgroundColor: "green",
-      color: "white",
-      font: "inherit",
-      border: "1px solid blue",
-      padding: "8px",
-      cursor: "pointer",
-    };
-
-    let persons = null;
+     let persons = null;
+     let btnClass = "";
 
     if(this.state.showPerson) {
       persons = (
           <div>
             {this.state.person.map((person, index) => {
-              return <Person 
-                click={this.deletePersonHandler.bind(this,index)}
-                // click={() => this.deletePersonHandler(index)}
-                name={person.name}
-                gender={person.gender}
-                age={person.age}
-                key={person.id}
-                change={(event) => this.changeNameHandler(event, person.id)}/>
+              return <ErrorBoundary key={person.id}>
+                <Person 
+                  click={this.deletePersonHandler.bind(this,index)}
+                  // click={() => this.deletePersonHandler(index)}
+                  name={person.name}
+                  gender={person.gender}
+                  age={person.age}
+                  change={(event) => this.changeNameHandler(event,  person.id)}/>
+                </ErrorBoundary>
             })}
           </div>
       );
-      designBtn.backgroundColor = "red";
+      btnClass = classes.red;
     }
 
     let classesVar = []; 
@@ -108,7 +101,7 @@ class App extends Component {
           <h1>Hi, I am a React App</h1>
           <p className={classesVar.join(" ")}>This is working!!</p>
           <button
-          style={designBtn} 
+          className={btnClass} 
           onClick={this.togglePeronsHandler}>
           Show Person
           </button>
