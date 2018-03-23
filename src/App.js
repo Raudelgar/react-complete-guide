@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
+/* 
+Need to add the {StyleRoot} with Radium, because the browser can 
+through an error (Uncaught Error: To use plugins requiring `addCSS` (e.g. keyframes, media queries), please wrap your application in the StyleRoot component.)
+*/
+import Radium, {StyleRoot} from 'radium';
 import './App.css';
 import Person from './Person/Person';
 
@@ -113,17 +117,18 @@ class App extends Component {
       classes.push("bold"); //classes = ["blue", "bold"] = //"blue bold"
     }
     return (
-      //jsx syntax
-      <div className="App">
-        <h1>Hi, I am a React App</h1>
-        <p className={classes.join(" ")}>This is working!!</p>
-        <button
-        style={designBtn} 
-        onClick={this.togglePeronsHandler}>
-        Show Person
-        </button>
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>Hi, I am a React App</h1>
+          <p className={classes.join(" ")}>This is working!!</p>
+          <button
+          style={designBtn} 
+          onClick={this.togglePeronsHandler}>
+          Show Person
+          </button>
+          {persons}
+        </div>
+      </StyleRoot>
     );
 
     //this is the same as above
