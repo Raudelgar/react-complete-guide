@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -96,17 +96,17 @@ class App extends Component {
       designBtn.backgroundColor = "red";
     }
 
-    let classes = []; 
+    let classesVar = []; 
     if(this.state.person.length <= 1) {
-      classes.push("blue"); //classes = ["blue"]
+      classesVar.push(classes.blue); //classesVar = ["blue"]
     }
     if(this.state.person.length < 1) {
-      classes.push("bold"); //classes = ["blue", "bold"] = //"blue bold"
+      classesVar.push(classes.bold); //classesVar = ["blue", "bold"] = //"blue bold"
     }
     return (
-        <div className="App">
+        <div className={classes.App}>
           <h1>Hi, I am a React App</h1>
-          <p className={classes.join(" ")}>This is working!!</p>
+          <p className={classesVar.join(" ")}>This is working!!</p>
           <button
           style={designBtn} 
           onClick={this.togglePeronsHandler}>
