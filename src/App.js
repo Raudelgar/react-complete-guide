@@ -1,9 +1,4 @@
 import React, { Component } from 'react';
-/* 
-Need to add the {StyleRoot} with Radium, because the browser can 
-through an error (Uncaught Error: To use plugins requiring `addCSS` (e.g. keyframes, media queries), please wrap your application in the StyleRoot component.)
-*/
-import Radium, {StyleRoot} from 'radium';
 import './App.css';
 import Person from './Person/Person';
 
@@ -79,10 +74,6 @@ class App extends Component {
       border: "1px solid blue",
       padding: "8px",
       cursor: "pointer",
-      ":hover": {
-        backgroundColor: "lightgreen",
-        color: "black"
-      }
     };
 
     let persons = null;
@@ -103,10 +94,6 @@ class App extends Component {
           </div>
       );
       designBtn.backgroundColor = "red";
-      designBtn[":hover"]= {
-        backgroundColor: "lightblue",
-        color: "black"
-      }
     }
 
     let classes = []; 
@@ -117,7 +104,6 @@ class App extends Component {
       classes.push("bold"); //classes = ["blue", "bold"] = //"blue bold"
     }
     return (
-      <StyleRoot>
         <div className="App">
           <h1>Hi, I am a React App</h1>
           <p className={classes.join(" ")}>This is working!!</p>
@@ -128,12 +114,8 @@ class App extends Component {
           </button>
           {persons}
         </div>
-      </StyleRoot>
     );
-
-    //this is the same as above
-    // return React.createElement('div', {className:'App'}, React.createElement('h1', null, 'Does this works?'));
   }
 }
 
-export default Radium(App);
+export default App;
