@@ -17,9 +17,10 @@ const cockpit = (props) => {
   }
   return (
         <div className={classes.Cockpit}>
-          <h1>Hi, I am a React App</h1>
+          <h1>{props.appTitle}</h1>
           <p className={classesVar.join(" ")}>This is working!!</p>
           <button
+
             className={btnClass} 
             onClick={props.toggle}>Show Person
           </button>
