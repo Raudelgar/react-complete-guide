@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './Cockpit.css';
+import Aux from '../../Hoc/AuxHoc';
 
 const cockpit = (props) => {
   let btnClass = classes.btn;
@@ -16,15 +17,14 @@ const cockpit = (props) => {
     classesVar.push(classes.bold); //classesVar = ["blue", "bold"] = //"blue bold"
   }
   return (
-        <div >
+        <Aux>
           <h1>{props.appTitle}</h1>
           <p className={classesVar.join(" ")}>This is working!!</p>
           <button
-
             className={btnClass} 
             onClick={props.toggle}>Show Person
           </button>
-        </div>
+        </Aux>
   );
 }
 
