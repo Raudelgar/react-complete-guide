@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from './Person/Person';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
@@ -13,18 +13,6 @@ class App extends Component {
     ],
     showPerson : false
   }
-
-  //Method
-  // switchNameHandler = (newName) => {
-  //   // console.log("Was cliked!!");
-  //   this.setState({
-  //     person: [
-  //       {name: newName, gender: "he", age: 32},
-  //       {name: "Marjorie", gender: "she",age: 31}
-  //     ]
-  //   } 
-  //   );
-  // }
 
   //Method
   changeNameHandler = (event, id) =>{
@@ -68,44 +56,21 @@ class App extends Component {
   //React execution method
   render() {
      let persons = null;
-     let btnClass = "";
 
     if(this.state.showPerson) {
-      persons = (
-          <div>
-            {this.state.person.map((person, index) => {
-              return <ErrorBoundary key={person.id}>
-                <Person 
-                  click={this.deletePersonHandler.bind(this,index)}
-                  // click={() => this.deletePersonHandler(index)}
-                  name={person.name}
-                  gender={person.gender}
-                  age={person.age}
-                  change={(event) => this.changeNameHandler(event,  person.id)}/>
-                </ErrorBoundary>
-            })}
-          </div>
-      );
-      btnClass = classes.red;
+      persons = <Persons
+                  person={this.state.person}
+                  delete={this.deletePersonHandler}
+                  change={this.changeNameHandler}/>
     }
 
-    let classesVar = []; 
-    if(this.state.person.length <= 1) {
-      classesVar.push(classes.blue); //classesVar = ["blue"]
-    }
-    if(this.state.person.length < 1) {
-      classesVar.push(classes.bold); //classesVar = ["blue", "bold"] = //"blue bold"
-    }
     return (
         <div className={classes.App}>
-          <h1>Hi, I am a React App</h1>
-          <p className={classesVar.join(" ")}>This is working!!</p>
-          <button
-          className={btnClass} 
-          onClick={this.togglePeronsHandler}>
-          Show Person
-          </button>
-          {persons}
+        <Cockpit 
+          person={this.state.person}
+          showPerson={this.state.showPerson}
+          toggle={this.togglePeronsHandler}/>
+        {persons}
         </div>
     );
   }
