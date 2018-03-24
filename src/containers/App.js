@@ -5,13 +5,34 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
-  //Initializing variables
-  state = {
-    person: [
-      {id: 1, name: "Raudel", gender: "he", age: 31},
-      {id: 2, name: "Marjorie", gender: "she",age: 30}
-    ],
-    showPerson : false
+  //Constructor
+  constructor(props) {
+    super(props);
+    console.log("[App.js] Inside Constructor", props);
+    //Old way to initialize state
+    this.state = {
+      person: [
+        {id: 1, name: "Raudel", gender: "he", age: 31},
+        {id: 2, name: "Marjorie", gender: "she",age: 30}
+      ],
+      showPerson : false  
+    }
+  }
+  //Initializing variables. New React version
+  // state = {
+  //   person: [
+  //     {id: 1, name: "Raudel", gender: "he", age: 31},
+  //     {id: 2, name: "Marjorie", gender: "she",age: 30}
+  //   ],
+  //   showPerson : false
+  // }
+
+  componentWillMount() {
+    console.log("[App.js] Inside componentWillMount()");
+  }
+
+  componentDidMount() {
+    console.log("[App.js] Inside componentDidMount()");
   }
 
   //Method
@@ -55,6 +76,7 @@ class App extends Component {
 
   //React execution method
   render() {
+    console.log("[App.js] Inside render()");
      let persons = null;
 
     if(this.state.showPerson) {

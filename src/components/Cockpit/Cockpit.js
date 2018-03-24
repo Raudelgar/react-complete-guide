@@ -2,11 +2,11 @@ import React from 'react';
 import classes from './Cockpit.css';
 
 const cockpit = (props) => {
-  let btnClass = "";
+  let btnClass = classes.btn;
   let classesVar = []; 
 
   if(props.showPerson) {
-    btnClass = classes.red;
+    btnClass = [classes.btn, classes.red].join(" ");
   }
 
   if(props.person.length <= 1) {
@@ -16,7 +16,7 @@ const cockpit = (props) => {
     classesVar.push(classes.bold); //classesVar = ["blue", "bold"] = //"blue bold"
   }
   return (
-        <div className={classes.Cockpit}>
+        <div >
           <h1>{props.appTitle}</h1>
           <p className={classesVar.join(" ")}>This is working!!</p>
           <button
