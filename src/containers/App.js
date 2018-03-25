@@ -17,7 +17,8 @@ class App extends Component {
         {id: 1, name: "Raudel", gender: "he", age: 31},
         {id: 2, name: "Marjorie", gender: "she",age: 30}
       ],
-      showPerson : false  
+      showPerson : false,
+      toggleClicked: 0
     }
   }
   //Initializing variables. New React version
@@ -61,7 +62,12 @@ class App extends Component {
 
   togglePeronsHandler = () => {
     const doesShow = this.state.showPerson;
-    this.setState({showPerson : !doesShow});
+    this.setState((prevState, props) => {
+      return {
+        showPerson : !doesShow,
+        toggleClicked: prevState.toggleClicked +1
+      }
+    });
   }
 
   //delete a person method
