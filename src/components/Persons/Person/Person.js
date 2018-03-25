@@ -16,7 +16,7 @@ class Person extends Component {
 
   componentDidMount() {
     console.log("[Person.js] Inside componentDidMount()");
-    if(this.props.positionInd == 0) {
+    if(this.props.positionInd === 0) {
       this.elementInput.focus();
     }  
   }
